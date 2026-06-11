@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alessandro Rubagotti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0f0d;
+    --paper: #f4f0e8;
+    --accent: #1a3a2a;
+    --accent-light: #2d6648;
+    --mid: #6b6b5e;
+    --rule: #d4cfc3;
+    --warm-white: #faf8f3;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    padding: 6rem 3rem 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--rule);
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 2rem;
+  }
+
+  .hero-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 9vw, 128px);
+    line-height: 0.92;
+    color: var(--ink);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-headline em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: var(--accent-light);
+  }
+
+  .hero-statement {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--mid);
+    max-width: 480px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-statement strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .cta-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--paper);
+    padding: 0.875rem 2rem;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--accent-light); }
+
+  .btn-ghost {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--accent);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem;
+    min-height: 100%;
+  }
+
+  .hero-right-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    filter: grayscale(40%);
+  }
+
+  .hero-quote {
+    position: relative;
+    z-index: 2;
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    color: var(--paper);
+    line-height: 1.4;
+    max-width: 400px;
+  }
+
+  .hero-quote-attr {
+    position: relative;
+    z-index: 2;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,0.5);
+    margin-top: 1rem;
+  }
+
+  /* MANIFESTO */
+  .manifesto {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 7rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .manifesto-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,0.4);
+    padding-top: 0.5rem;
+  }
+
+  .manifesto-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.45;
+    color: var(--paper);
+  }
+
+  .manifesto-text em {
+    font-style: italic;
+    color: #7ab89a;
+  }
+
+  /* THREE PILLARS */
+  .pillars {
+    padding: 7rem 3rem;
+    background: var(--warm-white);
+    border-top: 1px solid var(--rule);
+  }
+
+  .pillars-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    align-items: end;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 5vw, 72px);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+  }
+
+  .pillars-intro {
+    font-size: 1.15rem;
+    color: var(--mid);
+    line-height: 1.8;
+    align-self: end;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+
+  .pillar {
+    padding: 3rem 2.5rem;
+    border-right: 1px solid var(--rule);
+  }
+
+  .pillar:last-child { border-right: none; }
+
+  .pillar-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    color: var(--rule);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .pillar-title {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+
+  .pillar-text {
+    font-size: 0.95rem;
+    color: var(--mid);
+    line-height: 1.75;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    padding: 7rem 3rem;
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+  }
+
+  .testimonials-header {
+    margin-bottom: 4rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--rule);
+  }
+
+  .testimonial {
+    background: var(--warm-white);
+    padding: 2.5rem;
+  }
+
+  .testimonial-text {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+
+  .testimonial-source {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* JOURNEY */
+  .journey {
+    padding: 7rem 3rem;
+    background: var(--warm-white);
+    border-top: 1px solid var(--rule);
+  }
+
+  .journey-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    margin-top: 4rem;
+  }
+
+  .journey-aside {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+  }
+
+  .journey-intro {
+    font-size: 1rem;
+    color: var(--mid);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .journey-stat {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .journey-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: var(--ink);
+    line-height: 1;
+    display: block;
+  }
+
+  .journey-stat-label {
+    font-size: 12px;
+    color: var(--mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+
+  .timeline { list-style: none; }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .timeline-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .timeline-date {
+    font-size: 12px;
+    color: var(--mid);
+    letter-spacing: 0.05em;
+    padding-top: 0.3rem;
+    text-align: right;
+    border-right: 1px solid var(--rule);
+    padding-right: 2rem;
+  }
+
+  .timeline-content { padding-left: 0; }
+
+  .timeline-role {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-company {
+    font-size: 0.85rem;
+    color: var(--accent-light);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--mid);
+    line-height: 1.7;
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8rem 3rem;
+    text-align: center;
+  }
+
+  .contact-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 112px);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    margin-bottom: 2rem;
+  }
+
+  .contact-headline em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: #7ab89a;
+  }
+
+  .contact-sub {
+    font-size: 1.1rem;
+    color: rgba(244,240,232,0.6);
+    margin-bottom: 3rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .contact-email {
+    display: inline-block;
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--paper);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(244,240,232,0.3);
+    padding-bottom: 4px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .contact-email:hover {
+    color: #7ab89a;
+    border-color: #7ab89a;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .contact-link {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover { color: var(--paper); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(244,240,232,0.1);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: rgba(244,240,232,0.25);
+    letter-spacing: 0.05em;
+  }
+
+  /* FADE-IN ANIMATION */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 6rem 1.5rem 3rem; }
+    .hero-right { min-height: 40vh; padding: 2rem 1.5rem; }
+    .hero-headline { font-size: 72px; }
+
+    .manifesto { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 1.5rem; }
+
+    .pillars { padding: 4rem 1.5rem; }
+    .pillars-header { grid-template-columns: 1fr; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .pillar { border-right: none; border-bottom: 1px solid var(--rule); }
+    .pillar:last-child { border-bottom: none; }
+
+    .testimonials { padding: 4rem 1.5rem; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+
+    .journey { padding: 4rem 1.5rem; }
+    .journey-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .journey-aside { position: static; }
+
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .timeline-date { text-align: left; border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; margin-bottom: 0.5rem; }
+
+    .contact { padding: 5rem 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">Alessandro Rubagotti</a>
+  <ul class="nav-links">
+    <li><a href="#manifesto">What I believe</a></li>
+    <li><a href="#solutions">Solutions</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#contact">Let's talk</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Environment · Operations · Strategy</p>
+    <h1 class="hero-headline">Built<br>to move<br><em>things</em><br>forward.</h1>
+    <p class="hero-statement">
+      As <strong>operations and project professional</strong>, I work at the intersection of <strong>people, operations, and sustainability</strong> where most companies have problems they don't yet know how to name. I help them name them. Then fix them together.
+    </p>
+    <div class="cta-row">
+      <a href="#contact" class="btn-primary">Let's talk</a>
+      <a href="#journey" class="btn-ghost">See my path</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img
+      class="hero-right-img"
+      src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80"
+      alt="Mountains"
+    />
+    <p class="hero-quote">"E quindi uscimmo a riveder le stelle"</p>
+    <p class="hero-quote-attr">Dante Alighieri, Inferno XXXIV, 139</p>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto" id="manifesto">
+  <p class="manifesto-label">What I believe</p>
+  <p class="manifesto-text reveal">
+    The future belongs to those who believe in <em>potential</em>, in people who have not yet been given the right conditions, and in resources we have not yet respected enough to use well. I believe in <em>unlocking what is already there</em>. And I believe that a good adventure is the mix of discovery and accepting discomfort.
+  </p>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="pillars-header">
+    <div>
+      <p class="section-label">The three things I bring</p>
+      <h2 class="section-title">Potential.<br>Respect.<br>Enjoyment.</h2>
+    </div>
+    <p class="pillars-intro">
+      These are not values written on a wall. They are my filter for running every project, every team, every decision through. When all three are present, organisations move. When one is missing, I ask why before I do anything else.
+    </p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar reveal">
+      <span class="pillar-number">01</span>
+      <h3 class="pillar-title">Potential</h3>
+      <p class="pillar-text">People are almost always more capable than the system around them allows. Resources are almost always more valuable than the way they are being used. My job is to close that gap — in operations, in teams, in organisations going through change.</p>
+    </div>
+    <div class="pillar reveal">
+      <span class="pillar-number">02</span>
+      <h3 class="pillar-title">Respect</h3>
+      <p class="pillar-text">Respect for the person on the floor and the one in the boardroom. Respect for the environment as a stakeholder, not a constraint. Respect for complexity, not pretending things are simpler than they are to make yourself look decisive.</p>
+    </div>
+    <div class="pillar reveal">
+      <span class="pillar-number">03</span>
+      <h3 class="pillar-title">Enjoyment</h3>
+      <p class="pillar-text">Work that does not have some element of genuine engagement is work that will not be done well. I have climbed mountains, managed a surf camp, and rowed to two world championship medals. I bring that same energy to organisations that are willing to earn it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section class="pillars" id="solutions">
+  <div class="pillars-header">
+    <div>
+      <p class="section-label">Three blunt promises</p>
+      <h2 class="section-title">What I actually do.</h2>
+    </div>
+    <p class="pillars-intro"> I jump into the unknown with the hearth of an explorer </p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar reveal">
+      <span class="pillar-number">01</span>
+      <h3 class="pillar-title">Project rescue</h3>
+      <p class="pillar-text">Your project is stuck. It is half-managed, the schedule is tight , and you need a person. I take it over and make it functional for long-term growth. Not perfect, but ready to succeed and  leap forward. 15 years of complex situations. I move things forward, not just write reports.</p>
+    </div>
+    <div class="pillar reveal">
+      <span class="pillar-number">02</span>
+      <h3 class="pillar-title"> Impact Delivery </h3>
+      <p class="pillar-text">You have an idea and need a trusted partner. I bring hard skills, curiosity, and commitment, helping move ideas forward with confidence.</p>
+    </div>
+    <div class="pillar reveal">
+      <span class="pillar-number">03</span>
+      <h3 class="pillar-title">An explorer</h3>
+      <p class="pillar-text"> You have great people and a good structure, but you need a someone who likes to explore new ideas, new connections, new locations. I travel globally to connect and think outside the box</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-header">
+    <p class="section-label">What people say</p>
+    <h2 class="section-title" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,5vw,72px);line-height:0.95;">From 15+ colleagues<br>and MBA peers.</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial reveal">
+      <p class="testimonial-text">"You always bring new approaches to the discussions."</p>
+      <p class="testimonial-source">MBA Peer — Solvay Business School</p>
+    </div>
+    <div class="testimonial reveal">
+      <p class="testimonial-text">"You're pragmatic and you keep it cool in difficult situations."</p>
+      <p class="testimonial-source">Colleague — Professional context</p>
+    </div>
+    <div class="testimonial reveal">
+      <p class="testimonial-text">"If you don't know something, you don't have any problem admitting it — but you catch up fast."</p>
+      <p class="testimonial-source">Colleague — Professional context</p>
+    </div>
+    <div class="testimonial reveal">
+      <p class="testimonial-text">"Your positivity is contagious. You are at ease with everyone."</p>
+      <p class="testimonial-source">Colleague — Professional context</p>
+    </div>
+    <div class="testimonial reveal">
+      <p class="testimonial-text">"You are extremely empathic and a perfect teammate."</p>
+      <p class="testimonial-source">MBA Peer — Solvay Business School</p>
+    </div>
+    <div class="testimonial reveal">
+      <p class="testimonial-text">"Your management is smooth. You are very knowledgeable — and that impresses me."</p>
+      <p class="testimonial-source">Colleague — Professional context</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="journey" id="journey">
+  <p class="section-label">The path</p>
+  <h2 class="section-title" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,5vw,72px);line-height:0.95;">15 years.<br>Four countries.<br>One direction.</h2>
+  <div class="journey-grid">
+    <div class="journey-aside">
+      <p class="journey-intro">From field technician measuring industrial emissions to ESG consultant working with boards and shareholders. The thread through all of it: making organisations work better for people and the world they operate in.</p>
+      <div class="journey-stat">
+        <span class="journey-stat-num">15+</span>
+        <span class="journey-stat-label">Years of experience</span>
+      </div>
+      <div class="journey-stat">
+        <span class="journey-stat-num">4</span>
+        <span class="journey-stat-label">Countries worked in</span>
+      </div>
+      <div class="journey-stat">
+        <span class="journey-stat-num">5</span>
+        <span class="journey-stat-label">Languages spoken</span>
+      </div>
+      <div class="journey-stat">
+        <span class="journey-stat-num">2</span>
+        <span class="journey-stat-label">World Championship medals (rowing)</span>
+      </div>
+    </div>
+    <ul class="timeline">
+      <li class="timeline-item reveal">
+        <span class="timeline-date">2026 — Now</span>
+        <div class="timeline-content">
+          <p class="timeline-role">Independent Consultant & Project Lead</p>
+          <p class="timeline-company">Ticino, Switzerland</p>
+          
+        </div>
+      </li>
+      <li class="timeline-item reveal">
+        <span class="timeline-date">2025</span>
+        <div class="timeline-content">
+          <p class="timeline-role">Climate Risk & Senior Business Developer</p>
+          <p class="timeline-company">Correntics AG — Zürich, Switzerland</p>
+          
+        </div>
+      </li>
+      <li class="timeline-item reveal">
+        <span class="timeline-date">2021 — 2024</span>
+        <div class="timeline-content">
+          <p class="timeline-role">ESG/HSE & Strategy Consultant</p>
+          <p class="timeline-company">Accenture SA — Brussels, Belgium</p>
+          
+        </div>
+      </li>
+      <li class="timeline-item reveal">
+        <span class="timeline-date">2021 — 2024</span>
+        <div class="timeline-content">
+          <p class="timeline-role">International Asset Manager</p>
+          <p class="timeline-company">Fluxys SA — Brussels, Belgium</p>
+         
+        </div>
+      </li>
+      <li class="timeline-item reveal">
+        <span class="timeline-date">2016 — 2021</span>
+        <div class="timeline-content">
+          <p class="timeline-role">HSE Manager & Project Officer</p>
+          <p class="timeline-company">Haemers Technologies SA — Brussels, Belgium</p>
+          
+        </div>
+      </li>
+      <li class="timeline-item reveal">
+        <span class="timeline-date">2014 — 2016</span>
+        <div class="timeline-content">
+          <p class="timeline-role">Independent Consultant & Project Lead</p>
+          <p class="timeline-company">New Zealand — Portugal</p>
+         
+        </div>
+      </li>
+      <li class="timeline-item reveal">
+        <span class="timeline-date">2013 — 2014</span>
+        <div class="timeline-content">
+          <p class="timeline-role">Assistant HSE Manager</p>
+          <p class="timeline-company">Cornaglia Group S.p.A. — Turin, Italy</p>
+         
+        </div>
+      </li>
+      <li class="timeline-item reveal">
+        <span class="timeline-date">2012 — 2013</span>
+        <div class="timeline-content">
+          <p class="timeline-role">Field Coordinator</p>
+          <p class="timeline-company">GE Water & Process Technologies — Venice, Italy</p>
+          
+        </div>
+      </li>
+      <li class="timeline-item reveal">
+        <span class="timeline-date">2010 — 2012</span>
+        <div class="timeline-content">
+          <p class="timeline-role">HSE Field Operator</p>
+          <p class="timeline-company">Unitech s.n.c. — Turin, Italy</p>
+          
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2 class="contact-headline">Let's<br>do something<br><em>real.</em></h2>
+  <p class="contact-sub">If you are building something that matters — or trying to fix something that should matter more — I want to hear about it.</p>
+  <a href="mailto:alessandro.rubagotti@gmail.com" class="contact-email">alessandro.rubagotti@gmail.com</a>
+  <div class="contact-links">
+    <a href="https://www.linkedin.com/in/rubagotti/" class="contact-link" target="_blank">LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Alessandro Rubagotti</p>
+  <p>Lugano, Switzerland</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
